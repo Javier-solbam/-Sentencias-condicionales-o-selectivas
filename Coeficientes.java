@@ -3,17 +3,22 @@ Francisco Javier Solis Bamaca - 3°E
 taller de desarrollo 1 - 21/08/2021
  */
 package Sentencias_condicionales_o_selectivas;
+
+import static java.lang.Math.abs;
+import static java.lang.Math.sqrt;
+
 /*
 Construir un programa que calcule y muestre por pantalla las raíces de la ecuación de segundo grado de coeficientes reales.
 El programa debe diferenciar los diferentes casos que puedan surgir: la existencia de dos raíces reales distintas, 
 de dos raíces reales iguales y de dos raíces complejas. Nota: se recomienda el empleo de sentencias if–else anidadas
-*/
+ */
 public class Coeficientes {
-   double a = 0 , b = 0 ,c = 0; //coeficientes
-   double deter = 0; // determinante
-   double x1 = 0,x2 = 0;//raíces
-   
-  //constructor
+
+    double a, b, c; //coeficientes
+    double deter; // determinante
+    double x1, x2;//raíces
+
+    //constructor
     public Coeficientes(double a, double b, double c) {
         this.a = a;
         this.b = b;
@@ -22,7 +27,16 @@ public class Coeficientes {
         this.x1 = x1;
         this.x2 = x2;
     }
-     
+
+    Coeficientes() {
+        a = 0;
+        b = 0;
+        c = 0; //coeficientes
+        deter = 0; // determinante
+        x1 = 0;
+        x2 = 0;//raíces
+    }
+
     //setter_____________________________
     public void setA(double a) {
         this.a = a;
@@ -35,34 +49,49 @@ public class Coeficientes {
     public void setC(double c) {
         this.c = c;
     }
-    
-    public void setDeter(double deter){
+
+    public void setDeter(double deter) {
         this.deter = deter;
     }
-    
-    public void setX1(double x1){
+
+    public void setX1(double x1) {
         this.x1 = x1;
     }
-     public void setX2(double x2){
+
+    public void setX2(double x2) {
         this.x2 = x2;
     }
 //__________________________
-    
-    public void Formula(){
-        deter = (b*b)-(4*a*c);// calculo del determinante
-        
-        //condicional para validar si el determinante es positivo
-        if (deter>0){
-            // si es positivo se calculan x1 y x2
-            
-        }else{
-            //si el determinante es negativo no se podrá realizar la operación
-            System.out.println("El determinate es negativo, por lo tanto no es posible"
-                    + "realizar la operación :(");
+
+    public void Formula() {
+        deter = b * b - 4 * a * c;// calculo del determinante
+        /*  El programa debe diferenciar los diferentes casos que puedan surgir: la existencia de dos raíces reales distintas, 
+        de dos raíces reales iguales y de dos raíces complejas.*/
+        if (deter > 0) {
+            // existencia de dos raíces reales distintas
+            x1 = (-b + Math.sqrt(deter)) / (2 * a); // b+raíz(b2-4ac)/(2a)
+            x2 = (-b - Math.sqrt(deter)) / (2 * a); // b-raíz(b2-4ac)/(2a)
+            System.out.println("para la eucación: " + a + " x² + " + b + "x + " + c);
+            System.out.println("las RAÍCES son DISTINTAS");
+            System.out.println("S = { " + x1 + " ; " + x2 + " }");
+        } else if (deter < 0) {
+            // existencia de dos raíces complejas
+            System.out.println("para la eucación: " + a + " x² + " + b + "x + " + c);
+            System.out.println("las RAÍCES son COMPLEJAS");
+            double parteReal, parteImaginaria;
+            deter = abs(deter);
+            parteReal = -b / (2 * a);
+            parteImaginaria = sqrt(deter) / (2 * a);
+            System.out.println("x1 = " + parteReal + " + " + parteImaginaria + "i");
+            System.out.println("x2 = " + parteReal + " - " + parteImaginaria + "i");
+        } else {
+            // existencia de dos raíces reales iguales
+            x1 = (-b) / (2 * a);
+            x2 = (-b) / (2 * a);
+            System.out.println("para la eucación: " + a + " x² + " + b + "x + " + c);
+            System.out.println("las RAÍCES son IGUALES");
+            System.out.println("S = { " + x1 + " ; " + x2 + " }");
         }
     }
-    
-   
-  
-    
+
 }
